@@ -1,0 +1,14 @@
+#title{
+    margin: 100px auto;
+    width: 90%;
+    text-align: center;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 96px;
+    font-family: Revalia;
+    /* remember to include <link href='https://fonts.googleapis.com/css?family=Revalia' rel='stylesheet'> */
+    line-height: 119px;
+    background: -webkit-linear-gradient(#FF0000, #D7DB0F,#000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
