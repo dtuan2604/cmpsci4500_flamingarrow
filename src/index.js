@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Menu from "./container/Menu";
+import Menu from "./container/Menu/Menu";
 import './index.css'
 
 const HomePage = () =>{

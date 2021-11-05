@@ -14,10 +14,15 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-.menu{
-    height: 20%;
+h2{
+    font-weight: normal;
+    font-style: normal;
+    font-family: Revalia;
+    background: -webkit-linear-gradient(#FF0000, #D7DB0F,#000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-button{
+.menu-button{
     padding: 0;
     display: block;
     margin: auto;
@@ -28,7 +33,7 @@ button{
     background-color: white;
     opacity: 0.6;
 }
-button:hover{
+.menu-button:hover{
     background: linear-gradient(180deg, #010101 0%, rgba(255,0,0,0.55) 100%);
     width: 292px;
     height: 75px;
