@@ -1,0 +1,46 @@
+#game-info{
+    display: inline-block;
+    width: 25%;
+    height: 80%;
+    text-align: center;
+}
+#game-info>h3{
+    text-align: center;
+    font-family: Revalia;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 2vw;;
+    font-height: 2vw;
+    background: linear-gradient(#FF0000, #D7DB0F,#000000);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+}
+span.player1, span.player2{
+    font-family: Revalia;
+    font-size: 1.5vw;;
+    font-height: 1.5vw;
+    margin: 2px;
+    background: linear-gradient(#FF0000, #D7DB0F,#000000);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+    display: block;
+    padding: 2px;
+}
+#board{
+    display: inline-block;
+
+    height: 80%;
+    margin-top: 0px;
+    background-color: white;
+}
+#game-console{
+    padding: 10px;
+    width: 90%;
+    display: flex;
+    margin: auto;
+    background: linear-gradient(180deg, #010101 0%, rgba(255,0,0,0.55) 100%);
+}

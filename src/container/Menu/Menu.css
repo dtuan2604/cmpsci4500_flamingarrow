@@ -1,4 +1,15 @@
 /* remember to include <link href='https://fonts.googleapis.com/css?family=Revalia' rel='stylesheet'> */
+#landing-page{
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    margin: 0px;
+    background-image: url(../../image/background.gif);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: 70%;
+}
 #title{
     margin: 100px auto;
     width: 90%;
@@ -85,6 +96,10 @@ input{
     width: 100px;
     height: 30px;
 }
+.slider-button[disabled]:hover{
+    opacity: 0.5 ;
+    background: white
+}
 .slider-button:hover{
     background: linear-gradient(180deg, #010101 0%, rgba(255,0,0,0.55) 100%);
 }
@@ -148,5 +163,11 @@ input{
 .MuiDialogContentText-root{
     width: 300px;
     height: 150px;
+}
+.game-history{
+    display: block;
+    font-weight: normal;
+    font-style: normal;
+    font-family: Revalia !important;
 }
 /*--------------------------------------------*/

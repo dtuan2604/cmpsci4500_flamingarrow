@@ -1,0 +1,23 @@
+td{
+    padding: 0;
+    border: solid;
+    border-collapse: collapse;
+}
+.chesspiece{
+    width: 90%;
+
+}
+button.button-cell, button.move{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: white;
+}
+td.can-move{
+    background-color: rgb(96, 207, 96) !important;
+}
+td.can-shoot{
+    background-color: rgb(218, 84, 84) !important;
+}
+

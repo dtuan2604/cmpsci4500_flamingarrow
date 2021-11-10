@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import GameConsole from "../GameConsole/GameConsole"
 import "./Menu.css"
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -19,6 +20,7 @@ const Menu = () =>{
     const [player1,setPlayer1] = useState("")
     const [player2,setPlayer2] = useState("")
     const [size, setSize] = useState(6)
+    const [history, setHistory] = useState([])
 
     const handleText1 = event=>{
         setPlayer1(event.target.value)
@@ -26,16 +28,21 @@ const Menu = () =>{
     const handleText2 = event=>{
         setPlayer2(event.target.value)
     }
-
-    const handleStart = ()=>{
-        console.log("Start")
-    }
     
     const handleOpen = id=>{
         if(id===0)
             setOpenstart(true)
-        else
+        else{
             setOpenhis(true)
+            console.log("Getting data")
+            var data = JSON.parse(localStorage.getItem('history'))
+            console.log("Finish getting")
+
+            if(data === null || data === "")
+                setHistory("")
+            else
+                setHistory(data)
+        }
     }
 
     const handleClose = id =>{
@@ -43,12 +50,31 @@ const Menu = () =>{
             setOpenstart(false)
         else
             setOpenhis(false)
+        // const data1 = [{
+        //     player1: "Duong",
+        //     player2: "Tuan",
+        //     result: 1
+        // },{
+        //     player1: "John",
+        //     player2: "Tim",
+        //     result: 2
+        // }]
+        // var test = []
+        // var data = JSON.parse(localStorage.getItem('history'))
+        
+        // if (data !== null)
+        //     test = [...data]
+        
+        // test.push(data1)
+        // localStorage.setItem('history', JSON.stringify(data1))
     }
 
     return(
-        <div>
+        <div id="main-page">
             {start ?
-           (<div>
+            (<GameConsole player1={player1} player2={player2} size={size} />)
+            :
+           (<div id="landing-page">
                 <div id="title">
                     Flaming Arrow
                 </div>
@@ -95,7 +121,9 @@ const Menu = () =>{
                                         Close
                                     </span>
                                 </button>
-                                <button className="slider-button" onClick={handleStart}> 
+                                <button className="slider-button" 
+                                onClick={()=>setStart(true)}
+                                disabled={player1 === "" || player2 === ""}> 
                                     <span className="slider-button-text">
                                         Start
                                     </span>
@@ -119,7 +147,29 @@ const Menu = () =>{
                             <DialogTitle>{"History"}</DialogTitle>
                             <DialogContent>
                             <DialogContentText id="alert-dialog-slide-description">
-                                Show history
+                                {((history !== null) && (history !== "")) ?
+                                (<span style={{textAlign: 'center'}}>
+                                    {history.map((game,index)=>{
+                                        return(
+                                            <span key={index} className="game-history">
+                                                <span>
+                                                    {game.player1}
+                                                </span>
+                                                 - 
+                                                <span>
+                                                    {game.player2}
+                                                </span>
+                                                <br />
+                                            </span>
+                                            
+                                        )
+                                    })}
+                                </span>)
+                                :(
+                                    <span>
+                                        Let's start a game with us!!
+                                    </span>
+                                )}
                             </DialogContentText>
                             </DialogContent>
                             <DialogActions>
@@ -131,9 +181,7 @@ const Menu = () =>{
                             </DialogActions>
                         </Dialog>
                 </div>
-           </div>)
-           :
-           ()}
+           </div>)}
         </div>
     )
 }

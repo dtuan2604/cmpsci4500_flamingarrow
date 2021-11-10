@@ -1,13 +1,50 @@
-import React, {useState} from "react";
+import React, {useState} from "react"
+import GameBoard from "../../component/GameBoard/GameBoard"
+import "./GameConsole.css"
+
 
 const GameConsole = props=>{
-    const [player1, player2] = props
+    const {player1, player2,size} = props
+    const [currplayer, setCurrplayer] = useState(1);
+    const [board, setBoard] = useState([])
 
     return(
-        <div>
-            Hello from GameConsole!
-            Player 1 is {player1}
-            Player 1 is {player2}
+        <div id="game-console">
+            <div id="game-info">
+                <h3>Welcome to the Amazon!</h3>
+                <h3>Current Turn</h3>
+                
+                    {currplayer === 1 ? 
+                    (
+                        <div>
+                            <span style={{fontWeight: 'bolder'}} className="player1">
+                                {player1}
+                            </span>
+                            <span style={{opacity: '0.5'}}className="player2">
+                                {player2}
+                            </span>
+                        </div>)
+                    :(<div>
+                        <span style={{opacity: '0.5'}} className="player1">
+                            {player1}
+                        </span>
+                        <span style={{fontWeight: 'bolder'}} className="player2">
+                            {player2}
+                        </span>
+                    </div>)}
+                
+                <h3>Announcement</h3>
+                <p>
+                    Print something
+                </p>
+            </div>
+            <div id="board">
+                <GameBoard 
+                board={board} 
+                setBoard={setBoard} 
+                size ={size} />
+            </div>
         </div>
     )
 }
+export default GameConsole
