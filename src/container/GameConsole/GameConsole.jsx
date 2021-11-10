@@ -6,7 +6,6 @@ import "./GameConsole.css"
 const GameConsole = props=>{
     const {player1, player2,size} = props
     const [currplayer, setCurrplayer] = useState(1);
-    const [board, setBoard] = useState([])
 
     return(
         <div id="game-console">
@@ -40,8 +39,6 @@ const GameConsole = props=>{
             </div>
             <div id="board">
                 <GameBoard 
-                board={board} 
-                setBoard={setBoard} 
                 size ={size} />
             </div>
         </div>
