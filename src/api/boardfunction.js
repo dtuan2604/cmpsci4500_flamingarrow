@@ -171,3 +171,79 @@ export const possibleMove = (board,x,y,object,size)=>{
       }
       return arr;
   }
+
+export const clearPossiblemove = (array,object,size)=>{
+  var tempArray = array
+  for(var k = 0; k < size; k++){
+    for(var h = 0; h < size; h++)
+      if(tempArray[k][h] === object)
+        tempArray[k][h] = 0
+  }
+  return tempArray
+}
+export const movePiece = (array, start, end)=>{
+  var tempArray = array
+  tempArray[end[0]][end[1]] = tempArray[start[0]][start[1]]  
+  tempArray[start[0]][start[1]] = 0
+  return tempArray
+}
+export const setFire = (array,x,y,object)=>{
+  var tempArray = array
+  tempArray[x][y] = object
+  return tempArray
+}
+export const isLose = (arr,size,player)=>{
+  if(arr.length === 0)
+    return false
+  for(var row = 0;row < size; row ++)
+  {
+      for (var colunm = 0; colunm < size; colunm++)
+      {
+          if(arr[row][colunm] === player)
+          {   
+            if(row > 0)
+            {
+              if(arr[row - 1][colunm] === 0)
+              return false;
+            }
+            if(row < size -1)
+            {
+              if(arr[row + 1][colunm]=== 0)
+              return false;
+            }
+            if(colunm > 0)
+            {
+              if(arr[row][colunm - 1] === 0)
+              return false;
+            }
+            if(colunm < size -1)
+            {
+              if(arr[row][colunm + 1] === 0)
+              return false;
+            }
+            if(colunm > 0 && row > 0)
+            {
+              if(arr[row - 1][colunm - 1] === 0)
+              return false;
+            }
+            if(colunm < size - 1 && row < size - 1)
+            {
+              if(arr[row + 1][colunm + 1] === 0)
+              return false;
+            }
+            if(colunm < size - 1 && row > 0)
+            {
+              if(arr[row - 1][colunm + 1] === 0)
+              return false;
+            }
+            if(colunm > 0 && row < size - 1)
+            {
+              if(arr[row + 1][colunm - 1] === 0)
+              return false;
+            }  
+          }
+          
+      }
+  }
+  return true;
+}

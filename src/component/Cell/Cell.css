@@ -9,33 +9,27 @@ td.can-move{
 td.can-shoot{
     background-color: rgb(218, 84, 84);
 }
+td.blank{
+    background-color: white;
+}
 .chesspiece{
     width: 90%;
 }
-button.button-chesspiece{
+button.button-chesspiece, .fire{
     width: 100%;
     margin: 0;
     padding: 0;
     border: none;
     background-color: white;
 }
-button.can-move{
+button.action{
     background-color: inherit;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    border: none;
-}
-button.can-shoot{
-    background-color: inherit;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    border: none;
-}
-button>.action{
     width: 100%;
     height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
 }
+
 
 

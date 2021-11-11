@@ -79,6 +79,7 @@ h2{
     display: inline-block;
     width: 150px;
     height: 50px;
+    margin-left: 12%;
 }
 input{
     width: 140px;
@@ -161,7 +162,7 @@ input{
     -moz-text-fill-color: transparent;
 }
 .MuiDialogContentText-root{
-    width: 300px;
+    width: 400px;
     height: 150px;
 }
 .game-history{
