@@ -80,7 +80,7 @@ const GameConsole = props=>{
                 <DialogContent>
                 <DialogContentText id="alert-dialog-slide-description">
                     <span className="congrat-text">
-                        You did a very great job {(winner===player1)?player1:player2}!
+                        You did a very great job {(winner === 1 )?player1:player2}!
                         Congratulation on your winning!! 
                         <br/>
                         If you are curious about how we
