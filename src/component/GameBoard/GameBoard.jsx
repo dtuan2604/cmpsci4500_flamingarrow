@@ -21,7 +21,6 @@ const GameBoard = props =>{
         var tempArray
         if(value === currplayer){
             if(currplayer === action){
-                console.log(board)
                 tempArray = possibleMove(board,x,y,can_move,size)
                 setAction(can_move)
                 setPosition([x,y])
@@ -32,7 +31,6 @@ const GameBoard = props =>{
                 setPosition([-1,-1])
             }
         }else if(value === can_move){
-            console.log(board)
             const end = [x,y]
             tempArray = movePiece(board,position,end)
             tempArray = clearPossiblemove(board,can_move,size) 
@@ -42,9 +40,9 @@ const GameBoard = props =>{
 
             setAction(can_shoot)
         }else if(value === can_shoot){
-            console.log(board)
             tempArray = setFire(board,x,y,fire)
             tempArray = clearPossiblemove(board,can_shoot,size)
+            
             setPosition([-1,-1])
 
             const next_turn = currplayer === 1 ? 2 : 1;
