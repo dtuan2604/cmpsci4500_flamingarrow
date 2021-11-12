@@ -45,10 +45,7 @@ const Menu = () =>{
         else{
             setOpenhis(true)
             var data = getHistory(setLoading)
-            if(data === null || data === "")
-                setHistory("")
-            else
-                setHistory(data)
+            setHistory(data)
         }
     }
 
@@ -59,6 +56,12 @@ const Menu = () =>{
             setOpenhis(false)
     }
 
+    const handleDelete = ()=>{
+        setLoading(true)
+        localStorage.clear()
+        setLoading(false)
+        setHistory(null)
+    }
     return(
         <div id="main-page">
             {start ?
@@ -148,7 +151,7 @@ const Menu = () =>{
                         <DialogTitle>{"History"}</DialogTitle>
                         <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
-                            {((history !== null) && (history !== "")) ?
+                            {((history !== null) && (history !== [])) ?
                             (<span style={{textAlign: 'center'}}>
                                 {history.map((game,index)=>{
                                     return(
@@ -167,13 +170,18 @@ const Menu = () =>{
                                 })}
                             </span>)
                             :(
-                                <span>
+                                <span style={{fontFamily: "Revalia"}}>
                                     Let's start a game with us!!
                                 </span>
                             )}
                         </DialogContentText>
                         </DialogContent>
                         <DialogActions>
+                            <button className="slider-button" onClick={()=>handleDelete()}>
+                                <span className="slider-button-text">
+                                    Delete
+                                </span>
+                            </button>
                             <button className="slider-button" onClick={()=>handleClose(1)}>
                                 <span className="slider-button-text">
                                     Close

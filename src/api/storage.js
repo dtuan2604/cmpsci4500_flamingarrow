@@ -5,7 +5,7 @@ export const getHistory = (setLoading)=>{
     return data
 }
 export const addHistory = (setLoading, gameresult)=>{
-    var newResult
+    var newResult = []
     var data = getHistory(setLoading)
 
     if(data!== null){
