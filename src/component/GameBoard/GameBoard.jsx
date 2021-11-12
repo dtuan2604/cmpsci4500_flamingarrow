@@ -3,14 +3,16 @@ import Cell from "../Cell/Cell"
 import { initBoard } from "../../api/boardfunction"
 import "./GameBoard.css"
 import {possibleMove, clearPossiblemove, 
-    movePiece, setFire, isLose} from "../../api/boardfunction"
-
+    movePiece, setFire, isLose, predictLoser} from "../../api/boardfunction"
+import { addHistory } from "../../api/storage"
 const can_move = 4
 const can_shoot = 5
 const fire = 3
 
 const GameBoard = props =>{
-    const {size, currplayer, setCurrplayer, setWinner, setPotentialloser, setOver} = props
+    const {size, currplayer, setCurrplayer, 
+        setWinner, setPotentialloser, setOver,
+        player1, player2, setLoading} = props
     const [board, setBoard] = useState([])
     const [position, setPosition] = useState([-1,-1])
     const [action, setAction] = useState(currplayer)
@@ -19,6 +21,7 @@ const GameBoard = props =>{
         var tempArray
         if(value === currplayer){
             if(currplayer === action){
+                console.log(board)
                 tempArray = possibleMove(board,x,y,can_move,size)
                 setAction(can_move)
                 setPosition([x,y])
@@ -29,6 +32,7 @@ const GameBoard = props =>{
                 setPosition([-1,-1])
             }
         }else if(value === can_move){
+            console.log(board)
             const end = [x,y]
             tempArray = movePiece(board,position,end)
             tempArray = clearPossiblemove(board,can_move,size) 
@@ -38,6 +42,7 @@ const GameBoard = props =>{
 
             setAction(can_shoot)
         }else if(value === can_shoot){
+            console.log(board)
             tempArray = setFire(board,x,y,fire)
             tempArray = clearPossiblemove(board,can_shoot,size)
             setPosition([-1,-1])
@@ -54,15 +59,35 @@ const GameBoard = props =>{
     },[size,setBoard])
 
     useEffect(()=>{
-        const islose = isLose(board,size,currplayer)
-        if(islose){
+        if(isLose(board,size,currplayer)){
             const winner = currplayer === 1 ? 2 : 1
             setWinner(winner)
             setOver(true)
-            console.log(`${currplayer} lose`)
+            
+            const gameresult = {
+                player1,
+                player2,
+                result: winner
+            }
+            addHistory(setLoading,gameresult)
         }
-        else
-            console.log("Checking potential loser")
+        else{
+            const opponent = currplayer === 1 ? 2 : 1
+            if(isLose(board,size,opponent)){
+                setWinner(currplayer)
+                setOver(true)
+                
+                const gameresult = {
+                    player1,
+                    player2,
+                    result: currplayer
+                }
+                addHistory(setLoading,gameresult)
+            }else{
+                setPotentialloser(predictLoser(board,currplayer,size))
+            }
+               
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[currplayer])
 

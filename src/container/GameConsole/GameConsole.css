@@ -31,6 +31,10 @@ span.player1, span.player2{
     display: block;
     padding: 2px;
 }
+.icon{
+    width: 2vw;
+    height: 2vw;
+}
 #board{
     display: inline-block;
     height: 80%;
@@ -49,6 +53,11 @@ span.player1, span.player2{
     font-style: normal;
     font-weight: normal; 
     display: inline-block;
+}
+.warning-text{
+    font-family: Revalia;
+    font-style: normal;
+    font-weight: normal; 
 }
 
 /* --------------------------------------------------*/

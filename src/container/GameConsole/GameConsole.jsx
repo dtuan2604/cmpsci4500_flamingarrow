@@ -1,6 +1,8 @@
 import React, {useState} from "react"
 import GameBoard from "../../component/GameBoard/GameBoard"
 import "./GameConsole.css"
+import icon1 from "../../image/player1.png"
+import icon2 from "../../image/player2.png"
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -13,7 +15,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   });
 
 const GameConsole = props=>{
-    const {player1, player2,size,setStart} = props
+    const {player1, player2,size,setStart,setLoading} = props
     const [currplayer, setCurrplayer] = useState(1)
     const [over, setOver] = useState(false)
     const [winner, setWinner] = useState(-1)
@@ -40,37 +42,56 @@ const GameConsole = props=>{
                     (
                         <div>
                             <span style={{fontWeight: 'bolder'}} className="player1">
+                                <img className="icon" src={icon1} alt={player1} />
                                 {player1}
                             </span>
                             <span style={{opacity: '0.5'}}className="player2">
-                                {player2}
+                                <img className="icon" src={icon2} alt={player2} />
+                                {player2}  
                             </span>
                         </div>)
                     :(<div>
                         <span style={{opacity: '0.5'}} className="player1">
-                            {player1}
+                            <img className="icon" src={icon1} alt={player1} />
+                            {player1}               
                         </span>
                         <span style={{fontWeight: 'bolder'}} className="player2">
-                            {player2}
+                            <img className="icon" src={icon2} alt={player2} />
+                            {player2}  
                         </span>
                     </div>)}
                 
                 <h3>Announcement</h3>
-                <p>
-                    Print something
-                </p>
+                {potentialloser !== -1 && 
+                    (<p className="warning-text">
+                        WARNING: Watch out player {potentialloser === 1 ? player1 : player2}.
+                        You are in danger, please be careful with your move 
+                    </p>)
+                }
+
             </div>
             <div id="board">
                 <GameBoard 
+                player1={player1}
+                player2={player2}
                 size ={size} 
                 setWinner={setWinner}
                 setPotentialloser={setPotentialloser}
                 currplayer={currplayer}
                 setCurrplayer={setCurrplayer}
                 setOver={setOver}
+                setLoading={setLoading}
                 />
             </div>
             <Dialog
+                sx={{
+                    "& .MuiDialog-container": {
+                      justifyContent: "flex-start",
+                      alignItems: "flex-start",
+                      marginLeft: "5%",
+                      marginTop:"10%"
+                    }
+                  }}  
                 open={over}
                 TransitionComponent={Transition}
                 keepMounted
@@ -83,9 +104,8 @@ const GameConsole = props=>{
                         You did a very great job {(winner === 1 )?player1:player2}!
                         Congratulation on your winning!! 
                         <br/>
-                        If you are curious about how we
-                        can predict loser ahead, please go to Instruction page for more 
-                        information!!
+                        If you are curious about how we can predict loser ahead,
+                        please go to Instruction page for more information!!
                     </span>
                 </DialogContentText>
                 </DialogContent>

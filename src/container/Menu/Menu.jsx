@@ -7,6 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import { getHistory } from "../../api/storage";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -16,6 +17,7 @@ const Menu = () =>{
     const [start, setStart] = useState(false)
     const [openstart, setOpenstart] = useState(false)
     const [openhis, setOpenhis] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const [player1,setPlayer1] = useState("")
     const [player2,setPlayer2] = useState("")
@@ -42,10 +44,7 @@ const Menu = () =>{
         }
         else{
             setOpenhis(true)
-            console.log("Getting data")
-            var data = JSON.parse(localStorage.getItem('history'))
-            console.log("Finish getting")
-
+            var data = getHistory(setLoading)
             if(data === null || data === "")
                 setHistory("")
             else
@@ -58,33 +57,18 @@ const Menu = () =>{
             setOpenstart(false)
         else
             setOpenhis(false)
-        // const data1 = [{
-        //     player1: "Duong",
-        //     player2: "Tuan",
-        //     result: 1
-        // },{
-        //     player1: "John",
-        //     player2: "Tim",
-        //     result: 2
-        // }]
-        // var test = []
-        // var data = JSON.parse(localStorage.getItem('history'))
-        
-        // if (data !== null)
-        //     test = [...data]
-        
-        // test.push(data1)
-        // localStorage.setItem('history', JSON.stringify(data1))
     }
 
     return(
         <div id="main-page">
             {start ?
-            (<GameConsole player1={player1} 
-                        player2={player2} 
-                        size={size} 
-                        setStart={setStart}
-                        />)
+            (<GameConsole 
+                player1={player1} 
+                player2={player2} 
+                size={size} 
+                setStart={setStart}
+                setLoading={setLoading}
+                />)
             :
            (<div id="landing-page">
                 <div id="title">
@@ -95,6 +79,11 @@ const Menu = () =>{
                         <span className="text-button">Start Game</span>
                     </button>
                     <Dialog
+                    sx={{
+                        "& .MuiDialog-container": {
+                          justifyContent: "center"
+                        }
+                      }} 
                     open={openstart}
                     TransitionComponent={Transition}
                     keepMounted
