@@ -9,6 +9,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { getHistory } from "../../api/storage";
 import { Link } from 'react-router-dom'
+import CircularProgress from '@mui/material/CircularProgress'
+import crown1 from "../../image/crown1.png"
+import crown2 from "../../image/crown2.png"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -170,16 +173,26 @@ const Menu = () =>{
                         <DialogTitle>{"History"}</DialogTitle>
                         <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
-                            {((history !== null) && (history !== [])) ?
+                            
+                            {loading ?
+                            (<CircularProgress />) 
+                            :
+                            ((history !== null) && (history !== [])) ?
                             (<span style={{textAlign: 'center'}}>
                                 {history.map((game,index)=>{
                                     return(
                                         <span key={index} className="game-history">
                                             <span>
                                                 {game.player1}
+                                                &nbsp;
+                                                {game.result === 1 &&
+                                                (<img className="crown" src={crown1} alt="black-crown" />)}
                                             </span>
-                                                - 
+                                            &nbsp;-&nbsp; 
                                             <span>
+                                                {game.result === 2 &&
+                                                (<img className="crown" src={crown2} alt="black-crown" />)}
+                                                &nbsp;
                                                 {game.player2}
                                             </span>
                                             <br />

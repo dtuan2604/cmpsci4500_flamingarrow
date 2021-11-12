@@ -70,21 +70,7 @@ const GameBoard = props =>{
             addHistory(setLoading,gameresult)
         }
         else{
-            const opponent = currplayer === 1 ? 2 : 1
-            if(isLose(board,size,opponent)){
-                setWinner(currplayer)
-                setOver(true)
-                
-                const gameresult = {
-                    player1,
-                    player2,
-                    result: currplayer
-                }
-                addHistory(setLoading,gameresult)
-            }else{
-                setPotentialloser(predictLoser(board,currplayer,size))
-            }
-               
+            setPotentialloser(predictLoser(board,currplayer,size))   
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[currplayer])
