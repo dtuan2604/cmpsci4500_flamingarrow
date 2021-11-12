@@ -8,6 +8,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { getHistory } from "../../api/storage";
+import { Link } from 'react-router-dom'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -19,6 +20,7 @@ const Menu = () =>{
     const [openhis, setOpenhis] = useState(false)
     const [loading, setLoading] = useState(false)
 
+    const [openIns, setOpenIns] = useState(false)
     const [player1,setPlayer1] = useState("")
     const [player2,setPlayer2] = useState("")
     const [size, setSize] = useState(6)
@@ -77,7 +79,24 @@ const Menu = () =>{
                 <div id="title">
                     Flaming Arrow
                 </div>
-                <div className="menu">
+                {( openIns ? 
+                (<div className="menu">
+                    <Link to='/about' >
+                        <button className="menu-button">
+                            <span className="text-button">About</span>
+                        </button>
+                    </Link>
+                    <Link to='/usermanual'>
+                        <button className="menu-button">
+                            <span className="text-button">Manual</span>
+                        </button>
+                    </Link>
+                    <button className="menu-button" onClick={()=>setOpenIns(false)}>
+                        <span className="text-button">Back</span>
+                    </button>
+                </div>)
+                :
+                (<div className="menu">
                     <button className="menu-button" onClick={()=>handleOpen(0)}>
                         <span className="text-button">Start Game</span>
                     </button>
@@ -135,8 +154,8 @@ const Menu = () =>{
                         </DialogActions>
                     </Dialog>
 
-                    <button className="menu-button">
-                    <span className="text-button">Instruction</span>
+                    <button className="menu-button" onClick={()=>setOpenIns(true)}>
+                        <span className="text-button">Instruction</span>
                     </button>
 
                     <button className="menu-button"onClick={()=>handleOpen(1)}>
@@ -189,7 +208,7 @@ const Menu = () =>{
                             </button>
                         </DialogActions>
                     </Dialog>
-                </div>
+                </div>))}
            </div>)}
         </div>
     )
