@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 import Cell from "../Cell/Cell"
 import { initBoard } from "../../api/boardfunction"
 import "./GameBoard.css"
-import {possibleMove, clearPossiblemove, 
+import {possibleMove, clearPossiblemove, isStuck,
     movePiece, setFire, isLose, predictLoser} from "../../api/boardfunction"
 import { addHistory } from "../../api/storage"
 const can_move = 4
@@ -21,9 +21,13 @@ const GameBoard = props =>{
         var tempArray
         if(value === currplayer){
             if(currplayer === action){
-                tempArray = possibleMove(board,x,y,can_move,size)
-                setAction(can_move)
-                setPosition([x,y])
+                const position = [x,y]
+                if(!isStuck(board,size,position)){
+                    tempArray = possibleMove(board,x,y,can_move,size)
+                    setAction(can_move)
+                    setPosition([x,y])
+                }else
+                    return
             }
             else{
                 tempArray = clearPossiblemove(board,can_move,size) 

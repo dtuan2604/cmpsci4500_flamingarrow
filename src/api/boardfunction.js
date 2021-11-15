@@ -193,6 +193,54 @@ export const setFire = (array,x,y,object)=>{
   tempArray[x][y] = object
   return tempArray
 }
+export const isStuck = (board,size,position)=>{
+  if(board.length === 0)
+    return false
+  var arr=board
+  var row = position[0]
+  var column = position[1]
+  if(row > 0)
+            {
+              if(arr[row - 1][column] === 0)
+              return false
+            }
+            if(row < size -1)
+            {
+              if(arr[row + 1][column]=== 0)
+              return false
+            }
+            if(column > 0)
+            {
+              if(arr[row][column - 1] === 0)
+              return false
+            }
+            if(column < size -1)
+            {
+              if(arr[row][column + 1] === 0)
+              return false
+            }
+            if(column > 0 && row > 0)
+            {
+              if(arr[row - 1][column - 1] === 0)
+              return false
+            }
+            if(column < size - 1 && row < size - 1)
+            {
+              if(arr[row + 1][column + 1] === 0)
+              return false
+            }
+            if(column < size - 1 && row > 0)
+            {
+              if(arr[row - 1][column + 1] === 0)
+              return false
+            }
+            if(column > 0 && row < size - 1)
+            {
+              if(arr[row + 1][column - 1] === 0)
+              return false
+            }  
+    return true
+}
 export const isLose = (board,size,player)=>{
   if(board.length === 0)
     return false
