@@ -9,18 +9,26 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-
+import {useTransition, animated} from 'react-spring'
+// import { style } from "@mui/system"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 
 const GameConsole = props=>{
-    const {player1, player2,size,setStart,setLoading} = props
+    const {player1, player2,size,setStart,setLoading, start} = props
     const [currplayer, setCurrplayer] = useState(1)
     const [over, setOver] = useState(false)
     const [winner, setWinner] = useState(-1)
     const [potentialloser, setPotentialloser] = useState(-1) 
+
+    const transition = useTransition(start,{
+        from :{x: -800, y: 0, opacity: 0},
+        enter: {x: 0, y: 0, opacity: 1},
+        leave: {x:100, y:800, opacity: 0, display:'none'},
+        delay: 300,
+    })
 
     const handleCloseDialog = ()=>{
         setStart(false)
@@ -30,6 +38,8 @@ const GameConsole = props=>{
     }
     return(
         <div id="game-console">
+            {transition((style,item)=> item ?
+            <animated.div style={style} className="transition-only">
             {winner !== -1 && 
             (<div className="pyro">
                 <div className="before"></div>
@@ -118,6 +128,9 @@ const GameConsole = props=>{
                     </button>
                 </DialogActions>
             </Dialog>
+            </animated.div>   
+            :
+            (<span></span>))}
         </div>
     )
 }

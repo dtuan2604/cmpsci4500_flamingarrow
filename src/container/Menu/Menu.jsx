@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom'
 import CircularProgress from '@mui/material/CircularProgress'
 import crown1 from "../../image/crown1.png"
 import crown2 from "../../image/crown2.png"
+import {useTransition, animated} from 'react-spring'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -28,6 +29,13 @@ const Menu = () =>{
     const [player2,setPlayer2] = useState("")
     const [size, setSize] = useState(6)
     const [history, setHistory] = useState([])
+
+    const transition = useTransition(!start,{
+        from :{x: -100, y: -800, opacity: 0},
+        enter: {x:0, y: 0, opacity: 1},
+        leave: {x:800, y:0, opacity: 0, display:'none'},
+        delay: 300,
+    })
 
     const handleText1 = event=>{
         setPlayer1(event.target.value)
@@ -69,16 +77,8 @@ const Menu = () =>{
     }
     return(
         <div id="main-page">
-            {start ?
-            (<GameConsole 
-                player1={player1} 
-                player2={player2} 
-                size={size} 
-                setStart={setStart}
-                setLoading={setLoading}
-                />)
-            :
-           (<div id="landing-page">
+            {transition((style,item)=> item ? 
+           <animated.div style={style} id="landing-page">
                 <div id="title">
                     Flaming Arrow
                 </div>
@@ -222,7 +222,17 @@ const Menu = () =>{
                         </DialogActions>
                     </Dialog>
                 </div>))}
-           </div>)}
+           </animated.div>
+           :
+            <span></span>)}
+            <GameConsole 
+                start={start}
+                player1={player1} 
+                player2={player2} 
+                size={size} 
+                setStart={setStart}
+                setLoading={setLoading}
+                />
         </div>
     )
 }

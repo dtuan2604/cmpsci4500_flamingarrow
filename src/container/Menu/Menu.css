@@ -179,3 +179,9 @@ input{
     height: 5%;
 }
 /*--------------------------------------------*/
+/* Adding effect on menu */
+.sub-mainpage{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
