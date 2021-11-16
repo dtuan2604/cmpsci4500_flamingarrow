@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React, {useEffect} from "react"
 import Cell from "../Cell/Cell"
 import { initBoard } from "../../api/boardfunction"
 import "./GameBoard.css"
@@ -10,12 +10,12 @@ const can_shoot = 5
 const fire = 3
 
 const GameBoard = props =>{
-    const {size, currplayer, setCurrplayer, 
-        setWinner, setPotentialloser, setOver,
-        player1, player2, setLoading} = props
-    const [board, setBoard] = useState([])
-    const [position, setPosition] = useState([-1,-1])
-    const [action, setAction] = useState(currplayer)
+    const {size, currplayer, setCurrplayer, position, automove, board,
+        setWinner, setPotentialloser, setOver, setPosition,setBoard,
+        player1, player2, setLoading, action, setAction} = props
+    // const [board, setBoard] = useState([])
+    // const [position, setPosition] = useState([-1,-1])
+    // const [action, setAction] = useState(currplayer)
     
     const handleOperation = (x,y,value) =>{
         var tempArray
@@ -89,6 +89,7 @@ const GameBoard = props =>{
                                 {row.map((cell,yindex)=>{
                                 return (<Cell key={cell === 0 ? yindex : (yindex + cell*size)} 
                                             currplayer = {currplayer}
+                                            automove = {automove}
                                             x={xindex}
                                             y={yindex}
                                             value={cell} 

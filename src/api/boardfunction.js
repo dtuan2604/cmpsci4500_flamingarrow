@@ -172,7 +172,16 @@ export const possibleMove = (board,x,y,object,size)=>{
 
       return arr;
   }
-
+export const allPosition = (board,size,object)=>{
+  var position = []
+  for(var k = 0; k < size; k++){
+    for(var h = 0; h < size; h++)
+      if(board[k][h] === object){
+        position.push([k,h])
+      }    
+  }
+  return position
+}
 export const clearPossiblemove = (array,object,size)=>{
   var tempArray = [...array]
   for(var k = 0; k < size; k++){
@@ -184,6 +193,9 @@ export const clearPossiblemove = (array,object,size)=>{
 }
 export const movePiece = (array, start, end)=>{
   var tempArray = [...array]
+  // console.log(start)
+  // console.log(end)
+  // console.log(start)
   tempArray[end[0]][end[1]] = tempArray[start[0]][start[1]]  
   tempArray[start[0]][start[1]] = 0
   return tempArray
@@ -196,6 +208,7 @@ export const setFire = (array,x,y,object)=>{
 export const isStuck = (board,size,position)=>{
   if(board.length === 0)
     return false
+
   var arr=board
   var row = position[0]
   var column = position[1]
