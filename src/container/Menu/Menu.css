@@ -67,14 +67,6 @@ a{
 }
 /*----------------------------------------------------------*/
 /*-------------Drop-Down menu-------------------*/
-h2{
-    font-weight: normal;
-    font-style: normal;
-    font-family: Revalia !important;
-    background: -webkit-linear-gradient(#FF0000, #D7DB0F,#000000);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 .text{
     font-family: Revalia;
     font-style: normal;

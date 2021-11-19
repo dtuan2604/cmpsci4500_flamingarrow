@@ -173,7 +173,6 @@ const Menu = () =>{
                         <DialogTitle>{"History"}</DialogTitle>
                         <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
-                            
                             {loading ?
                             (<CircularProgress />) 
                             :

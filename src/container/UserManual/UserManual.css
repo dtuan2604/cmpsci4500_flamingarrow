@@ -1,0 +1,28 @@
+.manual-img{
+    width: 25%;
+    height: 25%;
+}
+.manual-text{
+    margin-right: 3%;
+    width: 70%;
+    float: right;
+}
+#usermanual p, #usermanual h3{
+    font-size: 1vw;
+    font-family: Revalia;
+}
+h2{
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.5vw;
+    font-family: Revalia;
+    background: -webkit-linear-gradient(#FF0000, #D7DB0F,#000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#usermanual h3{
+    background: -webkit-linear-gradient(#FF0000, #D7DB0F,#000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.5vw;
+}
