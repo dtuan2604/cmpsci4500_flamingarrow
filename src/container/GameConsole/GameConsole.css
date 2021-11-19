@@ -67,6 +67,14 @@ span.player1, span.player2{
     height: 100%;
     background: linear-gradient(180deg, #010101 0%, rgba(255,0,0,0.55) 100%);
 }
+h2{
+    font-weight: normal;
+    font-style: normal;
+    font-family: Revalia !important;
+    background: -webkit-linear-gradient(#FF0000, #D7DB0F,#000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 /* --------------------------------------------------*/
 /* Displaying firework references from: http://jsfiddle.net/elin/7m3bL/ */
 
