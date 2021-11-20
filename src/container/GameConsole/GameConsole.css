@@ -10,8 +10,8 @@
     font-family: Revalia;
     font-style: normal;
     font-weight: normal;
-    font-size: 2vw;;
-    font-height: 2vw;
+    font-size: 1.5vw;;
+    font-height: 1.5vw;
     background: linear-gradient(#FF0000, #D7DB0F,#000000);
     -webkit-background-clip: text;
     -moz-background-clip: text;
@@ -42,11 +42,12 @@ span.player1, span.player2{
     background-color: inherit;
 }
 #game-console{
-    padding: 2%;
+    height: auto;
+    width: auto;
+    padding: 0;
     width: 90%;
-    display: flex;
+    display:flex;
     margin: auto;
-    background: linear-gradient(180deg, #010101 0%, rgba(255,0,0,0.55) 100%);
 }
 .congrat-text{
     font-family: Revalia;
@@ -59,7 +60,21 @@ span.player1, span.player2{
     font-style: normal;
     font-weight: normal; 
 }
-
+.transition-only{
+    padding: 2%;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #010101 0%, rgba(255,0,0,0.55) 100%);
+}
+h2{
+    font-weight: normal;
+    font-style: normal;
+    font-family: Revalia !important;
+    background: -webkit-linear-gradient(#FF0000, #D7DB0F,#000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 /* --------------------------------------------------*/
 /* Displaying firework references from: http://jsfiddle.net/elin/7m3bL/ */
 

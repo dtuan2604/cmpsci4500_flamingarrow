@@ -35,7 +35,7 @@ export const initBoard=(size)=>{
 export const possibleMove = (board,x,y,object,size)=>{
     //arr is the 2d array of the game , x is the row of the game , y is the column of the game 
     //display all possible option on right
-      var arr = board;
+      var arr = [...board];
       var row = x;
       var column = y+1;
       while (column < size)
@@ -169,11 +169,21 @@ export const possibleMove = (board,x,y,object,size)=>{
         column++;
         //go up unitl out of boundary
       }
+
       return arr;
   }
-
+export const allPosition = (board,size,object)=>{
+  var position = []
+  for(var k = 0; k < size; k++){
+    for(var h = 0; h < size; h++)
+      if(board[k][h] === object){
+        position.push([k,h])
+      }    
+  }
+  return position
+}
 export const clearPossiblemove = (array,object,size)=>{
-  var tempArray = array
+  var tempArray = [...array]
   for(var k = 0; k < size; k++){
     for(var h = 0; h < size; h++)
       if(tempArray[k][h] === object)
@@ -182,19 +192,72 @@ export const clearPossiblemove = (array,object,size)=>{
   return tempArray
 }
 export const movePiece = (array, start, end)=>{
-  var tempArray = array
+  var tempArray = [...array]
+  // console.log(start)
+  // console.log(end)
+  // console.log(start)
   tempArray[end[0]][end[1]] = tempArray[start[0]][start[1]]  
   tempArray[start[0]][start[1]] = 0
   return tempArray
 }
 export const setFire = (array,x,y,object)=>{
-  var tempArray = array
+  var tempArray = [...array]
   tempArray[x][y] = object
   return tempArray
 }
-export const isLose = (arr,size,player)=>{
-  if(arr.length === 0)
+export const isStuck = (board,size,position)=>{
+  if(board.length === 0)
     return false
+
+  var arr=board
+  var row = position[0]
+  var column = position[1]
+  if(row > 0)
+            {
+              if(arr[row - 1][column] === 0)
+              return false
+            }
+            if(row < size -1)
+            {
+              if(arr[row + 1][column]=== 0)
+              return false
+            }
+            if(column > 0)
+            {
+              if(arr[row][column - 1] === 0)
+              return false
+            }
+            if(column < size -1)
+            {
+              if(arr[row][column + 1] === 0)
+              return false
+            }
+            if(column > 0 && row > 0)
+            {
+              if(arr[row - 1][column - 1] === 0)
+              return false
+            }
+            if(column < size - 1 && row < size - 1)
+            {
+              if(arr[row + 1][column + 1] === 0)
+              return false
+            }
+            if(column < size - 1 && row > 0)
+            {
+              if(arr[row - 1][column + 1] === 0)
+              return false
+            }
+            if(column > 0 && row < size - 1)
+            {
+              if(arr[row + 1][column - 1] === 0)
+              return false
+            }  
+    return true
+}
+export const isLose = (board,size,player)=>{
+  if(board.length === 0)
+    return false
+  var arr = [...board]
   for(var row = 0;row < size; row ++)
   {
       for (var colunm = 0; colunm < size; colunm++)
@@ -252,18 +315,18 @@ export const predictLoser=(board,current,size)=>{
   if(board.length === 0)
     return -1
   var flag;
-  var arr3 = [...board];
-  var arr5 = [...board];
+  var arr3 = JSON.parse(JSON.stringify([...board]));
+  var arr5 =  JSON.parse(JSON.stringify([...board]));
   var player1 = 1;
   var player2 = 2;
   var path = 4;
   var count1 = 0;
   var count2 = 0;
   var currentplayer = current;
-  const options=(arr,x,y,object, size)=>{
+  const options=(array1,x,y,object, size)=>{
     //arr is the 2d array of the game , x is the row of the game , y is the column of the game 
     //display all possible option on right
-      
+      var arr = [...array1]
       var row = x;
       var column = y+1;
       while (column < size)
@@ -402,7 +465,7 @@ export const predictLoser=(board,current,size)=>{
   }
   
   const checklose=(array1,size1,player1,path1)=>{
-      var arr = array1;
+      var arr = [...array1];
       var player = player1;
       var size = size1;
       var path = path1;
@@ -459,7 +522,7 @@ export const predictLoser=(board,current,size)=>{
       return true;
   }
   const countpath=(arr,size)=>{
-      var arr5 = arr;
+      var arr5 = [...arr];
       var player1 = 2;
       var path = 5;
       var count2 = 0;

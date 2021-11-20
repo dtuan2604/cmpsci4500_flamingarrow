@@ -5,10 +5,10 @@ import player2 from "../../image/player2.png"
 import fire from "../../image/fire.png"
 
 const Cell = props =>{
-    const {value,x,y,size,handleOperation,currplayer} = props
-    const [cellsize, setCellsize] = useState("0")
+    const {value,x,y,size,handleOperation,
+        currplayer, automove} = props
+    const [cellsize, setCellsize] = useState(0)
 
-    
 
     useEffect(()=>{
         const tempSize = 40/size
@@ -26,17 +26,12 @@ const Cell = props =>{
                     value === 0 ? 
                     (<span></span>)
                     : <img className="fire" src={fire} alt="Fire" />
-                // <button className="button-chesspiece" 
-                //         onClick={()=>{handleOperation(x,y,value)}}
-                //         disabled={currplayer !== value}>
-                //     <img className="chesspiece" src={player1} alt="Player1" />
-                // </button>
                 ) 
                 : 
                 (
                     <button className={(value === 1 || value === 2) ? "button-chesspiece" : "action"}
                             onClick={()=>{handleOperation(x,y,value)}}
-                            disabled={(value === 1 || value === 2) && (currplayer !== value)}>
+                            disabled={(automove || ((value === 1 || value === 2) && (currplayer !== value)))}>
                         {value === 1 ?
                         (<img className="chesspiece" src={player1} alt="Player1" />)
                         :
@@ -47,22 +42,6 @@ const Cell = props =>{
                             (<span>&nbsp;</span>)
                         )}
                     </button>
-
-                    // value === 2 ? 
-                    // (<button className="button-chesspiece" 
-                    //         onClick={()=>{handleOperation(x,y,value)}}
-                    //         disabled={currplayer !== value}>
-                    //     <img className="chesspiece" src={player2} alt="Player2" />
-                    // </button>)
-                    // :
-                    // (
-                    //     value !== 0 ?
-                    //     (<button className="action"
-                    //         onClick={()=>{handleOperation(x,y,value)}}>
-                    //     </button>)
-                    //     :
-                    //     (<span></span>)
-                    // )
                 )
                     
             }

@@ -8,6 +8,12 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { getHistory } from "../../api/storage";
+import { Link } from 'react-router-dom'
+import CircularProgress from '@mui/material/CircularProgress'
+import crown1 from "../../image/crown1.png"
+import crown2 from "../../image/crown2.png"
+import {useTransition, animated} from 'react-spring'
+import Music from "../Music/Music";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -19,10 +25,18 @@ const Menu = () =>{
     const [openhis, setOpenhis] = useState(false)
     const [loading, setLoading] = useState(false)
 
+    const [openIns, setOpenIns] = useState(false)
     const [player1,setPlayer1] = useState("")
     const [player2,setPlayer2] = useState("")
     const [size, setSize] = useState(6)
     const [history, setHistory] = useState([])
+
+    const transition = useTransition(!start,{
+        from :{x: -100, y: -800, opacity: 0},
+        enter: {x:0, y: 0, opacity: 1},
+        leave: {x:800, y:0, opacity: 0, display:'none'},
+        delay: 300,
+    })
 
     const handleText1 = event=>{
         setPlayer1(event.target.value)
@@ -45,10 +59,7 @@ const Menu = () =>{
         else{
             setOpenhis(true)
             var data = getHistory(setLoading)
-            if(data === null || data === "")
-                setHistory("")
-            else
-                setHistory(data)
+            setHistory(data)
         }
     }
 
@@ -59,22 +70,37 @@ const Menu = () =>{
             setOpenhis(false)
     }
 
+    const handleDelete = ()=>{
+        setLoading(true)
+        localStorage.clear()
+        setLoading(false)
+        setHistory(null)
+    }
     return(
         <div id="main-page">
-            {start ?
-            (<GameConsole 
-                player1={player1} 
-                player2={player2} 
-                size={size} 
-                setStart={setStart}
-                setLoading={setLoading}
-                />)
-            :
-           (<div id="landing-page">
+            {transition((style,item)=> item ? 
+           <animated.div style={style} id="landing-page">
                 <div id="title">
                     Flaming Arrow
                 </div>
-                <div className="menu">
+                {( openIns ? 
+                (<div className="menu">
+                    <Link to='/about' >
+                        <button className="menu-button">
+                            <span className="text-button">About</span>
+                        </button>
+                    </Link>
+                    <Link to='/usermanual'>
+                        <button className="menu-button">
+                            <span className="text-button">Manual</span>
+                        </button>
+                    </Link>
+                    <button className="menu-button" onClick={()=>setOpenIns(false)}>
+                        <span className="text-button">Back</span>
+                    </button>
+                </div>)
+                :
+                (<div className="menu">
                     <button className="menu-button" onClick={()=>handleOpen(0)}>
                         <span className="text-button">Start Game</span>
                     </button>
@@ -132,8 +158,8 @@ const Menu = () =>{
                         </DialogActions>
                     </Dialog>
 
-                    <button className="menu-button">
-                    <span className="text-button">Instruction</span>
+                    <button className="menu-button" onClick={()=>setOpenIns(true)}>
+                        <span className="text-button">Instruction</span>
                     </button>
 
                     <button className="menu-button"onClick={()=>handleOpen(1)}>
@@ -148,16 +174,25 @@ const Menu = () =>{
                         <DialogTitle>{"History"}</DialogTitle>
                         <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
-                            {((history !== null) && (history !== "")) ?
+                            {loading ?
+                            (<CircularProgress />) 
+                            :
+                            ((history !== null) && (history !== [])) ?
                             (<span style={{textAlign: 'center'}}>
                                 {history.map((game,index)=>{
                                     return(
                                         <span key={index} className="game-history">
                                             <span>
                                                 {game.player1}
+                                                &nbsp;
+                                                {game.result === 1 &&
+                                                (<img className="crown" src={crown1} alt="black-crown" />)}
                                             </span>
-                                                - 
+                                            &nbsp;-&nbsp; 
                                             <span>
+                                                {game.result === 2 &&
+                                                (<img className="crown" src={crown2} alt="black-crown" />)}
+                                                &nbsp;
                                                 {game.player2}
                                             </span>
                                             <br />
@@ -167,13 +202,18 @@ const Menu = () =>{
                                 })}
                             </span>)
                             :(
-                                <span>
+                                <span style={{fontFamily: "Revalia"}}>
                                     Let's start a game with us!!
                                 </span>
                             )}
                         </DialogContentText>
                         </DialogContent>
                         <DialogActions>
+                            <button className="slider-button" onClick={()=>handleDelete()}>
+                                <span className="slider-button-text">
+                                    Delete
+                                </span>
+                            </button>
                             <button className="slider-button" onClick={()=>handleClose(1)}>
                                 <span className="slider-button-text">
                                     Close
@@ -181,8 +221,19 @@ const Menu = () =>{
                             </button>
                         </DialogActions>
                     </Dialog>
-                </div>
-           </div>)}
+                </div>))}
+           </animated.div>
+           :
+            <span></span>)}
+            <GameConsole 
+                start={start}
+                player1={player1} 
+                player2={player2} 
+                size={size} 
+                setStart={setStart}
+                setLoading={setLoading}
+                />
+                <Music></Music>
         </div>
     )
 }

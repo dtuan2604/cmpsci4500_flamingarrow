@@ -10,6 +10,9 @@
     background-position: center center;
     background-size: 70%;
 }
+a{
+    text-decoration: none;
+}
 #title{
     margin: 100px auto;
     width: 90%;
@@ -64,14 +67,6 @@
 }
 /*----------------------------------------------------------*/
 /*-------------Drop-Down menu-------------------*/
-h2{
-    font-weight: normal;
-    font-style: normal;
-    font-family: Revalia !important;
-    background: -webkit-linear-gradient(#FF0000, #D7DB0F,#000000);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 .text{
     font-family: Revalia;
     font-style: normal;
@@ -171,4 +166,14 @@ input{
     font-style: normal;
     font-family: Revalia !important;
 }
+.crown{
+    width: 5%;
+    height: 5%;
+}
 /*--------------------------------------------*/
+/* Adding effect on menu */
+.sub-mainpage{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
