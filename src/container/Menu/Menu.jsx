@@ -13,6 +13,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import crown1 from "../../image/crown1.png"
 import crown2 from "../../image/crown2.png"
 import {useTransition, animated} from 'react-spring'
+import Music from "../Music/Music";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -77,6 +78,7 @@ const Menu = () =>{
     }
     return(
         <div id="main-page">
+            {/* <Music /> */}
             {transition((style,item)=> item ? 
            <animated.div style={style} id="landing-page">
                 <div id="title">
