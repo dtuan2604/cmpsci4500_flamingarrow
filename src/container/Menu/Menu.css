@@ -10,6 +10,15 @@
     background-position: center center;
     background-size: 70%;
 }
+#music{
+    z-index: 2;
+    position: relative;
+    display: sticky;
+    float: right;
+    margin-top: 40%;
+    width: 3vw;
+    height: 3vw;
+}
 a{
     text-decoration: none;
 }

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import GameConsole from "../GameConsole/GameConsole"
+import Music from "../Music/Music"
 import "./Menu.css"
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -13,7 +14,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import crown1 from "../../image/crown1.png"
 import crown2 from "../../image/crown2.png"
 import {useTransition, animated} from 'react-spring'
-import Music from "../Music/Music";
+import icon from "../../image/soundicon.png"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -30,6 +31,11 @@ const Menu = () =>{
     const [player2,setPlayer2] = useState("")
     const [size, setSize] = useState(6)
     const [history, setHistory] = useState([])
+
+    const [playing, setPlaying] = useState(false)
+    const handleMusic = event=>{
+        setPlaying(!playing)
+    }
 
     const transition = useTransition(!start,{
         from :{x: -100, y: -800, opacity: 0},
@@ -78,7 +84,12 @@ const Menu = () =>{
     }
     return(
         <div id="main-page">
-            {/* <Music /> */}
+            <div id="music">
+                <button style={{width: '100%', height: '100%', backgroundColor: 'white', border: 'none'}} onClick={handleMusic}>
+                    <img src={icon} alt="soundicon" style={{width: '90%', height: '90%'}} />
+                </button>
+                <Music playing={playing}/>
+            </div>
             {transition((style,item)=> item ? 
            <animated.div style={style} id="landing-page">
                 <div id="title">
