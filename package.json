@@ -17,6 +17,7 @@
     "react-scripts": "4.0.3",
     "react-sound": "^1.2.0",
     "react-spring": "^9.3.0",
+    "serve": "^13.0.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
