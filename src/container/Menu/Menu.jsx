@@ -14,7 +14,6 @@ import CircularProgress from '@mui/material/CircularProgress'
 import crown1 from "../../image/crown1.png"
 import crown2 from "../../image/crown2.png"
 import {useTransition, animated} from 'react-spring'
-import icon from "../../image/soundicon.png"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -85,8 +84,8 @@ const Menu = () =>{
     return(
         <div id="main-page">
             <div id="music">
-                <button style={{width: '100%', height: '100%', backgroundColor: 'white', border: 'none'}} onClick={handleMusic}>
-                    <img src={icon} alt="soundicon" style={{width: '90%', height: '90%'}} />
+                <button style={{width: '100%', height: '100%', backgroundColor: 'white', border: 'none', padding: '0'}} onClick={handleMusic}>
+                    {playing ? <i className='fas fa-volume-up'></i> : <i className='fas fa-volume-mute'></i>}
                 </button>
                 <Music playing={playing}/>
             </div>
@@ -194,14 +193,14 @@ const Menu = () =>{
                                 {history.map((game,index)=>{
                                     return(
                                         <span key={index} className="game-history">
-                                            <span>
+                                            <span className="his-player">
                                                 {game.player1}
                                                 &nbsp;
                                                 {game.result === 1 &&
                                                 (<img className="crown" src={crown1} alt="black-crown" />)}
                                             </span>
                                             &nbsp;-&nbsp; 
-                                            <span>
+                                            <span className="his-player">
                                                 {game.result === 2 &&
                                                 (<img className="crown" src={crown2} alt="black-crown" />)}
                                                 &nbsp;
