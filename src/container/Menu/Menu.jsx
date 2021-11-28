@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import GameConsole from "../GameConsole/GameConsole"
-import Music from "../Music/Music"
+import Music from "../../component/Music/Music"
+import on from "../../image/volume-on.png"
+import off from "../../image/volume-off.png"
 import "./Menu.css"
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -85,7 +87,7 @@ const Menu = () =>{
         <div id="main-page">
             <div id="music">
                 <button style={{width: '100%', height: '100%', backgroundColor: 'white', border: 'none', padding: '0'}} onClick={handleMusic}>
-                    {playing ? <i className='fas fa-volume-up'></i> : <i className='fas fa-volume-mute'></i>}
+                    {playing ? <img className="music-img" src={on} alt="volume-on" /> : <img className="music-img" src={off} alt="volume-off" />}
                 </button>
                 <Music playing={playing}/>
             </div>
