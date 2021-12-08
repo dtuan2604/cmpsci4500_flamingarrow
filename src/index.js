@@ -14,16 +14,14 @@ const HomePage = () =>{
     
     return(
         <div id="App">
-            {/* <Router> */}
-                <Routes>
-                        <Route path="/" exact element={<Menu />} ></Route>
-                        <Route path="/menu" element={<Menu />} ></Route>
-                        <Route path="/about" element={<About/>} ></Route>
-                        <Route path="/usermanual" element={<UserManual/>} ></Route>
-                        <Route path="/game" element={<GameConsole/>} ></Route>
-                        <Route path="/board" element={<GameBoard/>} ></Route>
-                </Routes>
-            {/* </Router> */}
+            <Routes>
+                    <Route path="/" exact element={<Menu />} ></Route>
+                    <Route path="/menu" element={<Menu />} ></Route>
+                    <Route path="/about" element={<About/>} ></Route>
+                    <Route path="/usermanual" element={<UserManual/>} ></Route>
+                    <Route path="/game" element={<GameConsole/>} ></Route>
+                    <Route path="/board" element={<GameBoard/>} ></Route>
+            </Routes>
         </div>
     )
 }
